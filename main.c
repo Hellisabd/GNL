@@ -17,13 +17,13 @@ int main(void)
 	while (i < 7)
 	{
 		line = get_next_line_bonus(fd1);
-		printf("line [%02d], fichier 1 : %s", i, line);
+		printf("line [%02d], fichier 1 : %s\n", i, line);
 		free (line);
 		line = get_next_line_bonus(fd2);
-		printf("line [%02d], fichier 2 : %s", i, line);
+		printf("line [%02d], fichier 2 : %s\n", i, line);
 		free (line);
 		line = get_next_line_bonus(fd3);
-		printf("line [%02d], fichier 3 : %s", i, line);
+		printf("line [%02d], fichier 3 : %s\n", i, line);
 		free (line);
 		i++;
 	}
