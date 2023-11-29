@@ -1,0 +1,9 @@
+{
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/local-home/bgrosjea/Desktop/workspace/GNL",
+            "binaryPath": "/local-home/bgrosjea/Desktop/workspace/GNL/a.out",
+            "binaryArgs": []
+        }
+    ]
+}

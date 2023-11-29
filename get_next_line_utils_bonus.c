@@ -6,7 +6,7 @@
 /*   By: bgrosjea <bgrosjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 15:15:27 by bgrosjea          #+#    #+#             */
-/*   Updated: 2023/11/22 17:50:56 by bgrosjea         ###   ########.fr       */
+/*   Updated: 2023/11/29 17:15:16 by bgrosjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,20 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	size_t	i;
 	size_t	a;
 
-	if (!s1 || !s2)
+	if (!s1 && !s2)
 		return (NULL);
 	dest = (char *)malloc(sizeof (char) * (ft_strlen(s2) + ft_strlen(s1) + 1));
 	if (!dest)
 		return (NULL);
 	i = 0;
 	a = 0;
-	while (s1[i] != '\0')
+	if (s1)
 	{
-		dest[i] = s1[i];
-		i++;
+		while (s2[i] != '\0')
+		{
+			dest[i] = s2[i];
+			i++;
+		}
 	}
 	while (s2[a] != '\0')
 	{

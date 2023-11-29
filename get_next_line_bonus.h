@@ -6,7 +6,7 @@
 /*   By: bgrosjea <bgrosjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 13:51:33 by bgrosjea          #+#    #+#             */
-/*   Updated: 2023/11/22 16:39:12 by bgrosjea         ###   ########.fr       */
+/*   Updated: 2023/11/29 15:25:22 by bgrosjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <unistd.h>
 
 # ifndef BUFFER_SIZE
-#   define BUFFER_SIZE 1000
+#   define BUFFER_SIZE 42
 # endif
 
 char	*get_next_line_bonus(int fd);

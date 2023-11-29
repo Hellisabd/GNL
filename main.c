@@ -1,4 +1,4 @@
-#include <fcntl.h>
+/*#include <fcntl.h>
 #include <stdio.h>
 #include "get_next_line_bonus.h"
 
@@ -11,8 +11,8 @@ int main(void)
 	int		fd3 = 0;
 
 	fd1 = open("tests/test1.txt", O_RDONLY);
-	fd1 = open("tests/test2.txt", O_RDONLY);
-	fd1 = open("tests/test3.txt", O_RDONLY);
+	fd2 = open("tests/test2.txt", O_RDONLY);
+	fd3 = open("tests/test3.txt", O_RDONLY);
 
 	while (i < 7)
 	{
@@ -31,4 +31,4 @@ int main(void)
 	close (fd2);
 	close (fd3);
 	return (0);
-}
+}*/

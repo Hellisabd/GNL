@@ -6,7 +6,7 @@
 /*   By: bgrosjea <bgrosjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 13:00:13 by bgrosjea          #+#    #+#             */
-/*   Updated: 2023/11/22 17:11:32 by bgrosjea         ###   ########.fr       */
+/*   Updated: 2023/11/29 17:15:58 by bgrosjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,12 @@ char	*ft_actual(char *src)
 	return (dest);
 }
 
-char *ft_transfer_buff(int fd, char *line)
+char	*ft_transfer_buff(int fd, char *line)
 {
 	int		read_bytes;
-	char		*buffer;
+	char	*buffer;
 
-	read_bytes = 0;
+	read_bytes = 1;
 	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buffer)
 		return (NULL);
@@ -95,7 +95,7 @@ char	*get_next_line_bonus(int fd)
 	char		*line;
 	static char	*res[4096];
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE < 1)
 		return (NULL);
 	res[fd] = ft_transfer_buff(fd, res[fd]);
 	if (!res[fd])
