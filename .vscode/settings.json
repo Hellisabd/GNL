@@ -5,5 +5,8 @@
             "binaryPath": "/local-home/bgrosjea/Desktop/workspace/GNL/a.out",
             "binaryArgs": []
         }
-    ]
+    ],
+    "files.associations": {
+        "unistd.h": "c"
+    }
 }

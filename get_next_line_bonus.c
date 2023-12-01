@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgrosjea <bgrosjea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: basile <basile@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 13:00:13 by bgrosjea          #+#    #+#             */
-/*   Updated: 2023/11/29 17:15:58 by bgrosjea         ###   ########.fr       */
+/*   Updated: 2023/12/01 16:14:50 by basile           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-char	*ft_next(char *src)
+static char	*ft_next(char *src)
 {
 	size_t	i;
 	char	*dest;
@@ -38,7 +38,7 @@ char	*ft_next(char *src)
 	return (dest);
 }
 
-char	*ft_actual(char *src)
+static char	*ft_actual(char *src)
 {
 	size_t	i;
 	char	*dest;
@@ -66,7 +66,7 @@ char	*ft_actual(char *src)
 	return (dest);
 }
 
-char	*ft_transfer_buff(int fd, char *line)
+static char	*ft_transfer_buff(int fd, char *line)
 {
 	int		read_bytes;
 	char	*buffer;

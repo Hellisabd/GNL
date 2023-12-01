@@ -1,0 +1,61 @@
+#include "get_next_line.h"
+
+size_t	ft_strlen(const char *s)
+{
+	size_t	i;
+
+	i = 0;
+    if (!s)
+    {
+        return (0);
+    }
+	while (s[i] != '\0')
+		i++;
+	return (i);
+}
+
+char	*ft_strchr(const char *s, int c)
+{
+    if (!s)
+       return (NULL);
+	while (*s != '\0')
+	{
+		if (*s == (char)c)
+			return ((char *)s);
+		s++;
+	}
+	if ((char)c == '\0')
+		return ((char *)s);
+	return (NULL);
+}
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*dest;
+	size_t	i;
+	size_t	a;
+
+	if (!s1 && !s2)
+		return (NULL);
+	dest = (char *)malloc(sizeof (char) * (ft_strlen(s2) + ft_strlen(s1) + 1));
+	if (!dest)
+		return (NULL);
+	i = 0;
+	a = 0;
+	if (s1)
+	{
+		while (s2[i] != '\0')
+		{
+			dest[i] = s2[i];
+			i++;
+		}
+	}
+	while (s2[a] != '\0')
+	{
+		dest[i] = s2[a];
+		i++;
+		a++;
+	}
+	dest [i] = '\0';
+	return (dest);
+}
