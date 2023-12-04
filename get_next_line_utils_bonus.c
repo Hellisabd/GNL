@@ -6,30 +6,28 @@
 /*   By: basile <basile@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 15:15:27 by bgrosjea          #+#    #+#             */
-/*   Updated: 2023/12/01 16:18:02 by basile           ###   ########.fr       */
+/*   Updated: 2023/12/04 19:11:21 by basile           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-size_t	ft_strlen(const char *s)
+size_t	ft_strlen(char *s)
 {
 	size_t	i;
 
 	i = 0;
-    if (!s)
-    {
-        return (0);
-    }
+	if (!s)
+		return (0);
 	while (s[i] != '\0')
 		i++;
 	return (i);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr(char *s, int c)
 {
-    if (!s)
-       return (NULL);
+	if (!s)
+		return (NULL);
 	while (*s != '\0')
 	{
 		if (*s == (char)c)
@@ -41,33 +39,30 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *line, char *buff)
 {
-	char	*dest;
 	size_t	i;
-	size_t	a;
+	size_t	j;
+	char	*str;
 
-	if (!s1 && !s2)
-		return (NULL);
-	dest = (char *)malloc(sizeof (char) * (ft_strlen(s2) + ft_strlen(s1) + 1));
-	if (!dest)
-		return (NULL);
-	i = 0;
-	a = 0;
-	if (s1)
+	if (!line)
 	{
-		while (s2[i] != '\0')
-		{
-			dest[i] = s2[i];
-			i++;
-		}
+		line = (char *)malloc(1 * sizeof(char));
+		line[0] = '\0';
 	}
-	while (s2[a] != '\0')
-	{
-		dest[i] = s2[a];
-		i++;
-		a++;
-	}
-	dest [i] = '\0';
-	return (dest);
+	if (!line || !buff)
+		return (NULL);
+	str = malloc(sizeof(char) * ((ft_strlen(line) + ft_strlen(buff)) + 1));
+	if (str == NULL)
+		return (NULL);
+	i = -1;
+	j = 0;
+	if (line)
+		while (line[++i] != '\0')
+			str[i] = line[i];
+	while (buff[j] != '\0')
+		str[i++] = buff[j++];
+	str[ft_strlen(line) + ft_strlen(buff)] = '\0';
+	free(line);
+	return (str);
 }

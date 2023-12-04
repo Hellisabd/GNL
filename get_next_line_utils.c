@@ -1,61 +1,73 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: basile <basile@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/04 19:09:12 by basile            #+#    #+#             */
+/*   Updated: 2023/12/04 19:09:13 by basile           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
+size_t	ft_strlen(char *s)
 {
 	size_t	i;
 
 	i = 0;
-    if (!s)
-    {
-        return (0);
-    }
+	if (!s)
+	{
+		return (0);
+	}
 	while (s[i] != '\0')
 		i++;
 	return (i);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr(char *s, int c)
 {
-    if (!s)
-       return (NULL);
-	while (*s != '\0')
+	int	i;
+
+	i = 0;
+	if (!s)
+		return (0);
+	if (c == '\0')
+		return ((char *)&s[ft_strlen(s)]);
+	while (s[i])
 	{
-		if (*s == (char)c)
-			return ((char *)s);
-		s++;
+		if (s[i] == (char)c)
+			return ((char *)&s[i]);
+		i++;
 	}
-	if ((char)c == '\0')
-		return ((char *)s);
-	return (NULL);
+	return (0);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *line, char *buff)
 {
 	char	*dest;
 	size_t	i;
-	size_t	a;
+	size_t	j;
 
-	if (!s1 && !s2)
+	if (!line)
+	{
+		line = (char *)malloc(1 * sizeof(char));
+		line[0] = '\0';
+	}
+	if (!line || !buff)
 		return (NULL);
-	dest = (char *)malloc(sizeof (char) * (ft_strlen(s2) + ft_strlen(s1) + 1));
+	dest = malloc(sizeof(char) * ((ft_strlen(buff) + ft_strlen(line)) + 1));
 	if (!dest)
 		return (NULL);
-	i = 0;
-	a = 0;
-	if (s1)
-	{
-		while (s2[i] != '\0')
-		{
-			dest[i] = s2[i];
-			i++;
-		}
-	}
-	while (s2[a] != '\0')
-	{
-		dest[i] = s2[a];
-		i++;
-		a++;
-	}
-	dest [i] = '\0';
+	i = -1;
+	j = 0;
+	if (line)
+		while (line[++i] != '\0')
+			dest[i] = line[i];
+	while (buff[j] != '\0')
+		dest[i++] = buff[j++];
+	dest[ft_strlen(line) + ft_strlen(buff)] = '\0';
+	free (line);
 	return (dest);
 }
