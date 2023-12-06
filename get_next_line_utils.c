@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: basile <basile@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bgrosjea <bgrosjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 19:09:12 by basile            #+#    #+#             */
-/*   Updated: 2023/12/04 19:09:13 by basile           ###   ########.fr       */
+/*   Updated: 2023/12/06 16:33:49 by bgrosjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,22 +44,11 @@ char	*ft_strchr(char *s, int c)
 	return (0);
 }
 
-char	*ft_strjoin(char *line, char *buff)
+char	*ft_split_join(char *line, char *buff, char *dest)
 {
-	char	*dest;
-	size_t	i;
+	int		i;
 	size_t	j;
 
-	if (!line)
-	{
-		line = (char *)malloc(1 * sizeof(char));
-		line[0] = '\0';
-	}
-	if (!line || !buff)
-		return (NULL);
-	dest = malloc(sizeof(char) * ((ft_strlen(buff) + ft_strlen(line)) + 1));
-	if (!dest)
-		return (NULL);
 	i = -1;
 	j = 0;
 	if (line)
@@ -68,6 +57,26 @@ char	*ft_strjoin(char *line, char *buff)
 	while (buff[j] != '\0')
 		dest[i++] = buff[j++];
 	dest[ft_strlen(line) + ft_strlen(buff)] = '\0';
+	return (dest);
+}
+
+char	*ft_strjoin(char *line, char *buff)
+{
+	char	*dest;
+
+	if (!line)
+	{
+		line = (char *)malloc(1 * sizeof(char));
+		if (!line)
+			return (NULL);
+		line[0] = '\0';
+	}
+	if (!buff)
+		return (free(line), NULL);
+	dest = malloc(sizeof(char) * ((ft_strlen(buff) + ft_strlen(line)) + 1));
+	if (dest == NULL)
+		return (free(line), NULL);
+	dest = ft_split_join(line, buff, dest);
 	free (line);
 	return (dest);
 }

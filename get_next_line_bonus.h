@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: basile <basile@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bgrosjea <bgrosjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/22 13:51:33 by bgrosjea          #+#    #+#             */
-/*   Updated: 2023/12/04 19:05:54 by basile           ###   ########.fr       */
+/*   Created: 2023/11/22 12:43:24 by bgrosjea          #+#    #+#             */
+/*   Updated: 2023/12/06 15:50:15 by bgrosjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 char	*get_next_line_bonus(int fd);
 char	*ft_strchr(char *s, int c);
-char	*ft_strjoin(char *line, char *buff);
+char	*ft_strjoin(char *s1, char *s2);
 size_t	ft_strlen(char *s);
 
 #endif

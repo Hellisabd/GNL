@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: basile <basile@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bgrosjea <bgrosjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 19:09:03 by basile            #+#    #+#             */
-/*   Updated: 2023/12/04 19:09:04 by basile           ###   ########.fr       */
+/*   Updated: 2023/12/06 16:23:10 by bgrosjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,7 @@ static char	*ft_next(char *src)
 	while (src[i] != '\n' && src[i])
 		i++;
 	if (!src[i])
-	{
-		free(src);
-		return (NULL);
-	}
+		return (free (src), NULL);
 	dest = malloc(sizeof(char) * (ft_strlen(src) - i + 1));
 	if (!dest)
 		return (NULL);
@@ -81,6 +78,8 @@ static char	*ft_transfer_buff(int fd, char *line)
 		if (read_bytes == -1)
 		{
 			free(buffer);
+			if (line)
+				free (line);
 			return (NULL);
 		}
 		buffer[read_bytes] = '\0';

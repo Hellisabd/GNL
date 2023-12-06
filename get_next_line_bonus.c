@@ -3,63 +3,60 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: basile <basile@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bgrosjea <bgrosjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/22 13:00:13 by bgrosjea          #+#    #+#             */
-/*   Updated: 2023/12/01 16:14:50 by basile           ###   ########.fr       */
+/*   Created: 2023/12/04 19:09:03 by basile            #+#    #+#             */
+/*   Updated: 2023/12/06 16:22:55 by bgrosjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "get_next_line.h"
 
 static char	*ft_next(char *src)
 {
-	size_t	i;
+	int		i;
+	int		j;
 	char	*dest;
 
 	i = 0;
-	while (*src != '\n' && src[i] != '\0')
-		src++;
-	if (!*src)
-	{
-		free(src);
-		return (NULL);
-	}
-	if (*src == '\n')
-		src++;
-	dest = malloc(sizeof(char) * ft_strlen(src) + 1);
-	i = 0;
-	while (src[i] != '\n' && src[i] != '\0')
-	{
-		dest[i] = src[i];
+	j = 0;
+	while (src[i] != '\n' && src[i])
 		i++;
-	}
-	dest[i] = '\0';
+	if (!src[i])
+		return (free (src), NULL);
+	dest = malloc(sizeof(char) * (ft_strlen(src) - i + 1));
+	if (!dest)
+		return (free (src), NULL);
+	i++;
+	while (src[i])
+		dest[j++] = src[i++];
+	dest[j] = '\0';
+	free(src);
 	return (dest);
 }
 
 static char	*ft_actual(char *src)
 {
-	size_t	i;
+	int		i;
 	char	*dest;
 
 	i = 0;
 	if (!src[i])
 		return (NULL);
-	while (src[i] != '\n' && src[i] != '\0')
+	while (src[i] != '\n' && src[i])
 		i++;
-	dest = malloc(sizeof(char) * (i + 2));
+	dest = (char *)malloc(sizeof(char) * (i + 2));
 	if (!dest)
-		return (NULL);
-	i = -1;
-	while (src[i] != '\n' && src[i] != '\0')
+		return (free(src), NULL);
+	i = 0;
+	while (src[i] != '\n' && src[i])
 	{
 		dest[i] = src[i];
 		i++;
 	}
 	if (src[i] == '\n')
 	{
-		dest[i] = '\n';
+		dest[i] = src[i];
 		i++;
 	}
 	dest[i] = '\0';
@@ -71,16 +68,19 @@ static char	*ft_transfer_buff(int fd, char *line)
 	int		read_bytes;
 	char	*buffer;
 
-	read_bytes = 1;
 	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buffer)
 		return (NULL);
+	read_bytes = 1;
 	while (!ft_strchr(line, '\n') && read_bytes != 0)
 	{
+		(void) fd;
 		read_bytes = read(fd, buffer, BUFFER_SIZE);
 		if (read_bytes == -1)
 		{
-			free(buffer);
+			if (line)
+				free (line);
+			free (buffer);
 			return (NULL);
 		}
 		buffer[read_bytes] = '\0';
@@ -95,12 +95,14 @@ char	*get_next_line_bonus(int fd)
 	char		*line;
 	static char	*res[4096];
 
-	if (fd < 0 || BUFFER_SIZE < 1)
-		return (NULL);
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd >= 4096)
+		return (0);
 	res[fd] = ft_transfer_buff(fd, res[fd]);
 	if (!res[fd])
 		return (NULL);
 	line = ft_actual(res[fd]);
+	if (!line)
+		return (line);
 	res[fd] = ft_next(res[fd]);
 	return (line);
 }

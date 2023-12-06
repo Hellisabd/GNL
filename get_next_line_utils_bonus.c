@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: basile <basile@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bgrosjea <bgrosjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/22 15:15:27 by bgrosjea          #+#    #+#             */
-/*   Updated: 2023/12/04 19:11:21 by basile           ###   ########.fr       */
+/*   Created: 2023/12/04 19:09:12 by basile            #+#    #+#             */
+/*   Updated: 2023/12/06 16:32:23 by bgrosjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "get_next_line.h"
 
 size_t	ft_strlen(char *s)
 {
@@ -18,7 +18,9 @@ size_t	ft_strlen(char *s)
 
 	i = 0;
 	if (!s)
+	{
 		return (0);
+	}
 	while (s[i] != '\0')
 		i++;
 	return (i);
@@ -26,43 +28,55 @@ size_t	ft_strlen(char *s)
 
 char	*ft_strchr(char *s, int c)
 {
+	int	i;
+
+	i = 0;
 	if (!s)
-		return (NULL);
-	while (*s != '\0')
+		return (0);
+	if (c == '\0')
+		return ((char *)&s[ft_strlen(s)]);
+	while (s[i])
 	{
-		if (*s == (char)c)
-			return ((char *)s);
-		s++;
+		if (s[i] == (char)c)
+			return ((char *)&s[i]);
+		i++;
 	}
-	if ((char)c == '\0')
-		return ((char *)s);
-	return (NULL);
+	return (0);
 }
 
-char	*ft_strjoin(char *line, char *buff)
+char	*ft_split_join(char *line, char *buff, char *dest)
 {
-	size_t	i;
+	int		i;
 	size_t	j;
-	char	*str;
 
-	if (!line)
-	{
-		line = (char *)malloc(1 * sizeof(char));
-		line[0] = '\0';
-	}
-	if (!line || !buff)
-		return (NULL);
-	str = malloc(sizeof(char) * ((ft_strlen(line) + ft_strlen(buff)) + 1));
-	if (str == NULL)
-		return (NULL);
 	i = -1;
 	j = 0;
 	if (line)
 		while (line[++i] != '\0')
-			str[i] = line[i];
+			dest[i] = line[i];
 	while (buff[j] != '\0')
-		str[i++] = buff[j++];
-	str[ft_strlen(line) + ft_strlen(buff)] = '\0';
-	free(line);
-	return (str);
+		dest[i++] = buff[j++];
+	dest[ft_strlen(line) + ft_strlen(buff)] = '\0';
+	return (dest);
+}
+
+char	*ft_strjoin(char *line, char *buff)
+{
+	char	*dest;
+
+	if (!line)
+	{
+		line = (char *)malloc(1 * sizeof(char));
+		if (!line)
+			return (NULL);
+		line[0] = '\0';
+	}
+	if (!buff)
+		return (free(line), NULL);
+	dest = malloc(sizeof(char) * ((ft_strlen(buff) + ft_strlen(line)) + 1));
+	if (dest == NULL)
+		return (free(line), NULL);
+	dest = ft_split_join(line, buff, dest);
+	free (line);
+	return (dest);
 }
